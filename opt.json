@@ -4,8 +4,5 @@
       "korrrba/devpool-directory"
   ],
   "in": [
-      "alpha-labs-global/blockalizer",
-      "uniswap/interface",
-      "korrrba"
   ]
 }
