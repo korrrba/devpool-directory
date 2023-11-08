@@ -68,24 +68,20 @@ async function main() {
 
     for (const orgOrRepo of opt.in) {
       const urls: string[] = await getRepoUrls(orgOrRepo);
-      console.log(`opt in ${urls}`);
-      urls.forEach(url => { projectUrls.add(url); console.log(`added ${url}`);}) ;
+      urls.forEach(url => projectUrls.add(url)) ;
     }
     for (const orgOrRepo of opt.out) {
       const urls: string[] = await getRepoUrls(orgOrRepo);
-      console.log(`opt out ${urls}`);
-      urls.forEach(url => { projectUrls.delete(url); console.log(`deleted ${url}`);});
+      urls.forEach(url => projectUrls.delete(url));
     }
 
     // aggregate all project issues
     const allProjectIssues: Issue[] = [];
 
     console.log(projectUrls);
-    
+
     // for each project URL
     for (let projectUrl of projectUrls) {
-      console.log(projectUrl);
-      /*
       // get owner and repository names from project URL
       const [ownerName, repoName] = getRepoCredentials(projectUrl);
       // get all project issues (opened and closed)
@@ -160,12 +156,11 @@ async function main() {
           console.log(`Created: ${createdIssue.data.html_url} (${projectIssue.html_url})`);
         }
       }
-      */
     }
 
     // close missing issues
-    // await forceCloseMissingIssues(devpoolIssues, allProjectIssues);
-    
+    await forceCloseMissingIssues(devpoolIssues, allProjectIssues);
+
   } catch (err) {
     console.log(err);
   }
