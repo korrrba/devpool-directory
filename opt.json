@@ -1,7 +1,8 @@
 {
   "out": [
-      "ubiquity"
+      "ubiquity/devpool-directory"
   ],
   "in": [
+      "gitcoindev"
   ]
 }
