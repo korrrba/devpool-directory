@@ -81,9 +81,11 @@ async function main() {
     const allProjectIssues: Issue[] = [];
 
     console.log(projectUrls);
-    /*
+    
     // for each project URL
-    for (let projectUrl of projects.urls) {
+    for (let projectUrl of projectUrls) {
+      console.log(projectUrl);
+      /*
       // get owner and repository names from project URL
       const [ownerName, repoName] = getRepoCredentials(projectUrl);
       // get all project issues (opened and closed)
@@ -158,11 +160,12 @@ async function main() {
           console.log(`Created: ${createdIssue.data.html_url} (${projectIssue.html_url})`);
         }
       }
+      */
     }
 
     // close missing issues
     await forceCloseMissingIssues(devpoolIssues, allProjectIssues);
-    */
+    
   } catch (err) {
     console.log(err);
   }
