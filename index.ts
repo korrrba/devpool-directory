@@ -253,7 +253,7 @@ async function getAllIssues(ownerName: string, repoName: string) {
 async function getRepoUrls(orgOrRepo: string) {
   const params = orgOrRepo.split("/");
   let repos: string[] = [];
-
+  console.log(`Params ${params}, lenght ${params.length}`);
   switch (params.length) {
     case 1:  // org
       try {
@@ -262,7 +262,7 @@ async function getRepoUrls(orgOrRepo: string) {
         });
         repos = res.map((repo) => repo.html_url);
       } catch (e: unknown) {
-        console.warn(`Getting org repositories failed: ${e}`);
+        console.warn(`Getting ${orgOrRepo} org repositories failed: ${e}`);
       }
       break;
     case 2:  // owner/repo
