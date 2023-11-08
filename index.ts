@@ -65,11 +65,15 @@ async function main() {
 
     // aggregate projects.urls and opt settings
     let projectUrls = new Set<string>(projects.urls);
+    console.log(opt.in);
+    console.log(opt.out);
     for (let orgOrRepo in opt.in) {
+      console.log(orgOrRepo);
       const urls: string[] = await getRepoUrls(orgOrRepo);
       urls.forEach(projectUrls.add, projectUrls);
     }
     for (let orgOrRepo in opt.out) {
+      console.log(orgOrRepo);
       const urls: string[] = await getRepoUrls(orgOrRepo);
       urls.forEach(projectUrls.delete, projectUrls);
     }
