@@ -67,10 +67,12 @@ async function main() {
     let projectUrls = new Set<string>(projects.urls);
     opt.in.forEach(async orgOrRepo => {
       const urls: string[] = await getRepoUrls(orgOrRepo);
+      console.log(`opt in ${urls}`);
       urls.forEach(url => projectUrls.add(url));
     });
     opt.out.forEach(async orgOrRepo => {
       const urls: string[] = await getRepoUrls(orgOrRepo);
+      console.log(`opt out ${urls}`);
       urls.forEach(url => projectUrls.delete(url));
     });
 
@@ -255,7 +257,6 @@ async function getRepoUrls(orgOrRepo: string) {
   let repos: string[] = [];
   switch (params.length) {
     case 1:  // org
-      console.log(`org mode for ${orgOrRepo}`);
       try {
         const res = await octokit.paginate("GET /orgs/{org}/repos", {
           org: orgOrRepo,
@@ -266,7 +267,6 @@ async function getRepoUrls(orgOrRepo: string) {
       }
       break;
     case 2:  // owner/repo
-      console.log(`owner/repo mode for ${orgOrRepo}`);
       try {
         const res = await octokit.rest.repos.get({
           owner: params[0],
@@ -283,7 +283,6 @@ async function getRepoUrls(orgOrRepo: string) {
       console.warn(`Neither org or nor repo GitHub provided: ${orgOrRepo}.`);
   }
 
-  console.log(repos);
   return repos;
 }
 
