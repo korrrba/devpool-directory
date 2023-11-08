@@ -1,7 +1,8 @@
 {
   "out": [
       "ubiquity/devpool-directory",
-      "ubiquity/.github"
+      "ubiquity/.github",
+      "korrrba/devpool-directory"
   ],
   "in": [
       "alpha-labs-global/blockalizer",
