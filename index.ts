@@ -67,11 +67,11 @@ async function main() {
     let projectUrls = new Set<string>(projects.urls);
     opt.in.forEach(async orgOrRepo => {
       const urls: string[] = await getRepoUrls(orgOrRepo);
-      urls.forEach(projectUrls.add, projectUrls);
+      urls.forEach(url => projectUrls.add(url));
     });
     opt.out.forEach(async orgOrRepo => {
       const urls: string[] = await getRepoUrls(orgOrRepo);
-      urls.forEach(projectUrls.delete, projectUrls);
+      urls.forEach(url => projectUrls.delete(url));
     });
 
     // aggregate all project issues
