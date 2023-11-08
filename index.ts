@@ -66,12 +66,10 @@ async function main() {
     // aggregate projects.urls and opt settings
     let projectUrls = new Set<string>(projects.urls);
     opt.in.forEach(async orgOrRepo => {
-      console.log(orgOrRepo);
       const urls: string[] = await getRepoUrls(orgOrRepo);
       urls.forEach(projectUrls.add, projectUrls);
     });
     opt.out.forEach(async orgOrRepo => {
-      console.log(orgOrRepo);
       const urls: string[] = await getRepoUrls(orgOrRepo);
       urls.forEach(projectUrls.delete, projectUrls);
     });
@@ -255,30 +253,26 @@ async function getAllIssues(ownerName: string, repoName: string) {
 async function getRepoUrls(orgOrRepo: string) {
   const params = orgOrRepo.split("/");
   let repos: string[] = [];
-  console.log(`Params ${params}, lenght ${params.length}`);
   switch (params.length) {
     case 1:  // org
-      console.log("org mode");
+      console.log(`org mode for ${orgOrRepo}`);
       try {
         const res = await octokit.paginate("GET /orgs/{org}/repos", {
           org: orgOrRepo,
         });
         repos = res.map((repo) => repo.html_url);
-        console.log(repos);
       } catch (e: unknown) {
         console.warn(`Getting ${orgOrRepo} org repositories failed: ${e}`);
       }
       break;
     case 2:  // owner/repo
-      console.log("owner/repo mode");
+      console.log(`owner/repo mode for ${orgOrRepo}`);
       try {
         const res = await octokit.rest.repos.get({
           owner: params[0],
           repo: params[1]
         });
         if (res.status === 200) {
-          console.log(res.data);
-          console.log(res.data.html_url);
           repos.push(res.data.html_url);
         } else console.warn(`Getting owner/repo failed: ${res.status}`);
       } catch (e: unknown) {
@@ -289,6 +283,7 @@ async function getRepoUrls(orgOrRepo: string) {
       console.warn(`Neither org or nor repo GitHub provided: ${orgOrRepo}.`);
   }
 
+  console.log(repos);
   return repos;
 }
 
