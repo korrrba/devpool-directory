@@ -258,22 +258,27 @@ async function getRepoUrls(orgOrRepo: string) {
   console.log(`Params ${params}, lenght ${params.length}`);
   switch (params.length) {
     case 1:  // org
+      console.log("org mode");
       try {
         const res = await octokit.paginate("GET /orgs/{org}/repos", {
           org: orgOrRepo,
         });
         repos = res.map((repo) => repo.html_url);
+        console.log(repos);
       } catch (e: unknown) {
         console.warn(`Getting ${orgOrRepo} org repositories failed: ${e}`);
       }
       break;
     case 2:  // owner/repo
+      console.log("owner/repo mode");
       try {
         const res = await octokit.rest.repos.get({
           owner: params[0],
           repo: params[1]
         });
         if (res.status === 200) {
+          console.log(res.data);
+          console.log(res.data.html_url);
           repos.push(res.data.html_url);
         } else console.warn(`Getting owner/repo failed: ${res.status}`);
       } catch (e: unknown) {
