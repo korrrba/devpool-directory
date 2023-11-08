@@ -1,12 +1,12 @@
 {
   "out": [
       "ubiquity/devpool-directory",
-      "ubiquity/.github",
+      "ubiquity/devpool-directory-bounties",
       "korrrba/devpool-directory"
   ],
   "in": [
       "alpha-labs-global/blockalizer",
       "uniswap/interface",
-      "korrrrba"
+      "korrrba"
   ]
 }
