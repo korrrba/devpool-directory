@@ -1,0 +1,11 @@
+{
+  "out": [
+      "ubiquity/devpool-directory",
+      "ubiquity/.github"
+  ],
+  "in": [
+      "alpha-labs-global/blockalizer",
+      "uniswap/interface",
+      "korrrba"
+  ]
+}
