@@ -66,12 +66,12 @@ async function main() {
     // aggregate projects.urls and opt settings
     let projectUrls = new Set<string>(projects.urls);
 
-    opt.in.forEach(async orgOrRepo => {
+    await opt.in.forEach(async orgOrRepo => {
       const urls: string[] = await getRepoUrls(orgOrRepo);
       console.log(`opt in ${urls}`);
       urls.forEach(url => { projectUrls.add(url); console.log(`added ${url}`);}) ;
     });
-    opt.out.forEach(async orgOrRepo => {
+    await opt.out.forEach(async orgOrRepo => {
       const urls: string[] = await getRepoUrls(orgOrRepo);
       console.log(`opt out ${urls}`);
       urls.forEach(url => { projectUrls.delete(url); console.log(`deleted ${url}`);});
@@ -164,7 +164,7 @@ async function main() {
     }
 
     // close missing issues
-    await forceCloseMissingIssues(devpoolIssues, allProjectIssues);
+    // await forceCloseMissingIssues(devpoolIssues, allProjectIssues);
     
   } catch (err) {
     console.log(err);
